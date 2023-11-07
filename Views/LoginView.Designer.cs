@@ -32,6 +32,7 @@
             label6 = new Label();
             label7 = new Label();
             label1 = new Label();
+            pictureBox1 = new PictureBox();
             txtUsuario = new TextBox();
             label5 = new Label();
             linkCadastro = new Label();
@@ -40,10 +41,13 @@
             btnLogin = new Button();
             txtSenha = new TextBox();
             label4 = new Label();
+            pictureBox2 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
             splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
             // 
             // splitContainer1
@@ -62,6 +66,8 @@
             // splitContainer1.Panel2
             // 
             splitContainer1.Panel2.BackColor = Color.Gainsboro;
+            splitContainer1.Panel2.Controls.Add(pictureBox2);
+            splitContainer1.Panel2.Controls.Add(pictureBox1);
             splitContainer1.Panel2.Controls.Add(txtUsuario);
             splitContainer1.Panel2.Controls.Add(label5);
             splitContainer1.Panel2.Controls.Add(linkCadastro);
@@ -107,6 +113,16 @@
             label1.Size = new Size(38, 15);
             label1.TabIndex = 17;
             label1.Text = "label1";
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Anchor = AnchorStyles.None;
+            pictureBox1.Image = Properties.Resources.user_icon;
+            pictureBox1.Location = new Point(125, 140);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(31, 32);
+            pictureBox1.TabIndex = 29;
+            pictureBox1.TabStop = false;
             // 
             // txtUsuario
             // 
@@ -217,6 +233,16 @@
             label4.TabIndex = 25;
             label4.Text = "________________________________";
             // 
+            // pictureBox2
+            // 
+            pictureBox2.Anchor = AnchorStyles.None;
+            pictureBox2.Image = Properties.Resources.password_icon;
+            pictureBox2.Location = new Point(125, 189);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(31, 32);
+            pictureBox2.TabIndex = 30;
+            pictureBox2.TabStop = false;
+            // 
             // LoginView
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -232,6 +258,8 @@
             splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
             splitContainer1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ResumeLayout(false);
         }
 
@@ -249,5 +277,7 @@
         private Button btnLogin;
         private Label linkCadastro;
         private TextBox txtUsuario;
+        private PictureBox pictureBox1;
+        private PictureBox pictureBox2;
     }
 }
