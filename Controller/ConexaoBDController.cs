@@ -3,13 +3,13 @@ using MySql;
 using MySql.Data;
 using MySql.Data.MySqlClient;
 
-namespace PrototipoProjetoInterdisciplinar.Controllers
+namespace PrototipoProjetoInterdisciplinar.Controller
 {
-    public class ConexaoBDModel
+    public class ConexaoBDController
     {
         private MySqlConnection? mConn;
         private DataSet? mDataSet;
-        // private MySqlDataAdapter mAdapter;
+        private MySqlDataAdapter adapter;
         public void Conectar()
 
         {
@@ -22,7 +22,7 @@ namespace PrototipoProjetoInterdisciplinar.Controllers
             try
             {
                 mConn.Open();
-                
+
             }
             catch (Exception ex)
             {
@@ -31,18 +31,24 @@ namespace PrototipoProjetoInterdisciplinar.Controllers
 
         }
 
-        public MySqlConnection ObterConexao()
+        public MySqlDataAdapter ObterAdapter(string query)
         {
-            return mConn;
+            adapter = new MySqlDataAdapter(query, mConn);
+            return adapter;
         }
 
-        public void FecharConexao()
-        {
-            if (mConn != null && mConn.State == ConnectionState.Open)
+        public MySqlConnection ObterConexao()
             {
-                mConn.Close();
+                return mConn;
             }
-        }
+
+            public void FecharConexao()
+            {
+                if (mConn != null && mConn.State == ConnectionState.Open)
+                {
+                    mConn.Close();
+                }
+            }
 
     }
 }

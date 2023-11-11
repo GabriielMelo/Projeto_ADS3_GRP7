@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using OfficeOpenXml;
 using PrototipoProjetoInterdisciplinar.Controllers;
 using PrototipoProjetoInterdisciplinar.Model;
 using System;
@@ -7,23 +8,39 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace PrototipoProjetoInterdisciplinar.Controller
 {
     public class TransacaoController
     {
-        ConexaoBDModel conn = new();
-        public bool EfetuarTransacao(TransacaoModel transacao)
+        ConexaoBDController conn = new();
+        public bool EfetuarTransacao(ClienteModel cliente)
         {
             try
             {
                 conn.Conectar();
-                string sql = "INSERT INTO transacoes (id_cliente, data_transacao,valor,descricao) VALUES(@id_cliente,@data_transacao,@valor,@descricao)";
+                Random random = new();
+                int id_cliente = cliente.Id;
+                int cod_transacao = GerarCodigoTransacao();
+
+                TransacaoModel transacao = new()
+                {
+                    Id_Cliente = id_cliente,
+                    Data_Transacao = DateTime.Now.ToString("yyyy-MM-dd HH"),
+                    Valor = 0,
+                    Descricao = "Transacao OK",
+                    Cod_transacao = cod_transacao
+                };
+
+
+                string sql = "INSERT INTO transacoes (id_cliente, data_transacao,valor,descricao,cod_transacao) VALUES(@id_cliente,@data_transacao,@valor,@descricao,@cod_transacao)";
                
                 MySqlCommand command = new(sql, conn.ObterConexao());
                 command.Parameters.AddWithValue("id_cliente", transacao.Id_Cliente);
                 command.Parameters.AddWithValue("data_transacao", transacao.Data_Transacao);
                 command.Parameters.AddWithValue("valor", transacao.Valor);
                 command.Parameters.AddWithValue("descricao", transacao.Descricao);
+                command.Parameters.AddWithValue("cod_transacao", transacao.Cod_transacao);
 
                 int count = command.ExecuteNonQuery();
 
@@ -50,5 +67,14 @@ namespace PrototipoProjetoInterdisciplinar.Controller
             }
             
         }
+
+        public int GerarCodigoTransacao()
+        {
+            Random random = new();
+            int cod_transacao = random.Next(1000, 10000);
+            return cod_transacao;
+        }
+
+        
     }
 }
